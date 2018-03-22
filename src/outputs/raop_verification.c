@@ -792,7 +792,7 @@ encrypt_gcm(unsigned char *ciphertext, int ciphertext_len, unsigned char *tag, u
   gcry_cipher_hd_t hd;
   gcry_error_t err;
 
-  err = gcry_cipher_open(&hd, GCRY_CIPHER_AES128, GCRY_CIPHER_MODE_GCM, 0);
+  err = gcry_cipher_open(&hd, GCRY_CIPHER_AES128, 9, 0);
   if (err)
     {
       *errmsg = "Error initialising AES 128 GCM encryption";
@@ -820,13 +820,13 @@ encrypt_gcm(unsigned char *ciphertext, int ciphertext_len, unsigned char *tag, u
       goto error;
     }
 
-  err = gcry_cipher_gettag(hd, tag, AUTHTAG_LENGTH);
+  /*err = gcry_cipher_gettag(hd, tag, AUTHTAG_LENGTH);
   if (err)
     {
       *errmsg = "Error getting authtag";
       goto error;
     }
-
+  */
   gcry_cipher_close(hd);
   return 0;
 
